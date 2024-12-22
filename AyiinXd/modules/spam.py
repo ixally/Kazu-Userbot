@@ -274,11 +274,11 @@ async def dlyspamfw(event):
     channel_message_link = input_str[2]
     
     try:
-        # Mengambil pesan dari link channel publik
+        # Memecah link untuk mendapatkan username channel dan message_id
         message_id = int(channel_message_link.split('/')[-1])
         channel_username = channel_message_link.split('/')[3]
 
-        # Mendapatkan pesan dari channel publik
+        # Mendapatkan entitas channel dan pesan
         channel = await event.client.get_entity(channel_username)
         message = await event.client.get_messages(channel, ids=message_id)
 
@@ -292,7 +292,7 @@ async def dlyspamfw(event):
     for _ in range(counter):
         if gvarstatus("spamwork") is None:
             return
-        await event.client.forward_messages(event.chat_id, message.id, from_chat=channel)
+        await event.client.forward_messages(event.chat_id, message.id, channel)
         await asyncio.sleep(sleeptimem)
     
     if BOTLOG_CHATID:
@@ -301,8 +301,9 @@ async def dlyspamfw(event):
                 BOTLOG_CHATID, get_string("dspamfw_1").format(event.chat_id, counter, message.text)
             )
         else:
-            await event.client.send_message("dspamfw berhasil")
-
+            await event.client.send_message(
+                BOTLOG_CHATID, get_string("dspamfw_2").format(get_display_name(await event.get_chat()), event.chat_id, counter, message.text)
+            )
 
 CMD_HELP.update(
     {
