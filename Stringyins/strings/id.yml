@@ -3,6 +3,10 @@ asli: Indonesia
 
 penulis:
   - blu
+  
+# mager scroll
+dspamfw_1: "Berhasil melakukan delay spam forward di chat {} sebanyak {} kali. Pesan yang diteruskan: {}"
+dspamfw_2: "Berhasil melakukan delay spam forward di grup {} (ID: {}) sebanyak {} kali. Pesan yang diteruskan: {}"
 
 # constans
 pto_sml: "**Gambar Terlalu Kecil**"
